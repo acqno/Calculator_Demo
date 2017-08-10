@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.4 - Created a shared event handler for the Operator Buttons
+ * Ver: 0.5 - Added the Form "Load" event 
  */
 
 
@@ -20,6 +20,26 @@ namespace CalculatorDemo
 {
     public partial class CalculatorForm : Form
     {
+        // PRIVATE INSTANCE VARIABLES 
+        private bool _isDecimalClicked;
+
+        // PUBLIC PROPERTIES 
+        public bool IsDecimalClicked
+        {
+            get
+            {
+                return this._isDecimalClicked;
+            }
+            set
+            {
+                this._isDecimalClicked = value;
+            }
+         }
+
+        // CONSTRUCTORS 
+        /// <summary>
+        /// This is the main constructor for the CalculatorForm class
+        /// </summary>
         public CalculatorForm()
         {
             InitializeComponent();
@@ -46,6 +66,11 @@ namespace CalculatorDemo
         {
             Button calculatorButton = sender as Button; // downcasting 
 
+            if ((calculatorButton.Text == ".") && (this.IsDecimalClicked))
+            {
+                return;
+            }
+
             ResultTextBox.Text += calculatorButton.Text;
 
             //Debug.WriteLine("A Calculator Button was clicked");
@@ -58,7 +83,17 @@ namespace CalculatorDemo
         /// <param name="e"></param>
         private void OperatorButton_Click(object sender, EventArgs e)
         {
+            Button operatorButton = sender as Button; // downcasting 
 
+        }
+        /// <summary>
+        /// This is the event handler for the "Load" event 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculatorForm_Load(object sender, EventArgs e)
+        {
+            this.IsDecimalClicked = false;
         }
     }
 }

@@ -98,7 +98,7 @@
             this.equalsButton.TabIndex = 19;
             this.equalsButton.Text = "=";
             this.equalsButton.UseVisualStyleBackColor = false;
-            this.equalsButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.equalsButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // decimalButton
             // 
@@ -130,7 +130,7 @@
             this.plusMinusButton.TabIndex = 16;
             this.plusMinusButton.Text = "±";
             this.plusMinusButton.UseVisualStyleBackColor = true;
-            this.plusMinusButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.plusMinusButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // plusButton
             // 
@@ -140,7 +140,7 @@
             this.plusButton.TabIndex = 15;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = true;
-            this.plusButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.plusButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // threeButton
             // 
@@ -183,7 +183,7 @@
             this.minusButton.TabIndex = 11;
             this.minusButton.Text = "-";
             this.minusButton.UseVisualStyleBackColor = true;
-            this.minusButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.minusButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // sixButton
             // 
@@ -226,7 +226,7 @@
             this.timesButton.TabIndex = 7;
             this.timesButton.Text = "x";
             this.timesButton.UseVisualStyleBackColor = true;
-            this.timesButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.timesButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // nineButton
             // 
@@ -269,7 +269,7 @@
             this.divideButton.TabIndex = 3;
             this.divideButton.Text = "÷";
             this.divideButton.UseVisualStyleBackColor = true;
-            this.divideButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.divideButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // backspaceButton
             // 
@@ -279,7 +279,7 @@
             this.backspaceButton.TabIndex = 2;
             this.backspaceButton.Text = "⌫";
             this.backspaceButton.UseVisualStyleBackColor = true;
-            this.backspaceButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.backspaceButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // clearButton
             // 
@@ -290,7 +290,7 @@
             this.clearButton.TabIndex = 0;
             this.clearButton.Text = "C";
             this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.CalculatorButton_Click);
+            this.clearButton.Click += new System.EventHandler(this.OperatorButton_Click);
             // 
             // ResultTextBox
             // 
@@ -318,6 +318,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CalculatorForm_FormClosing);
+            this.Load += new System.EventHandler(this.CalculatorForm_Load);
             this.buttonTableLayout.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
