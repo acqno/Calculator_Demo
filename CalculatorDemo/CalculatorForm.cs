@@ -31,7 +31,7 @@ namespace CalculatorDemo
         /// <param name="e"></param>
         private void CalculatorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }
