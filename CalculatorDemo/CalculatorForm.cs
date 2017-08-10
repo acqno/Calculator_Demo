@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.5 - Added the Form "Load" event 
+ * Ver: 0.7 - Refactored CalculatorButton_click event & Added _calculate and _convertOperand methods
  */
 
 
@@ -22,6 +22,10 @@ namespace CalculatorDemo
     {
         // PRIVATE INSTANCE VARIABLES 
         private bool _isDecimalClicked;
+
+        private string _currentOperator;
+
+        private List<double> _operandList;
 
         // PUBLIC PROPERTIES 
         public bool IsDecimalClicked
@@ -35,6 +39,30 @@ namespace CalculatorDemo
                 this._isDecimalClicked = value;
             }
          }
+
+        public string CurrentOperator
+        {
+            get
+            {
+                return this._currentOperator;
+            } 
+            set
+            {
+                this._currentOperator = value;
+            }
+        }
+
+        public List<double> OperandList
+        {
+            get
+            {
+                return this._operandList;
+            }
+            set
+            {
+                this._operandList = value;
+            }
+        }
 
         // CONSTRUCTORS 
         /// <summary>
@@ -66,12 +94,33 @@ namespace CalculatorDemo
         {
             Button calculatorButton = sender as Button; // downcasting 
 
-            if ((calculatorButton.Text == ".") && (this.IsDecimalClicked))
+            if ((this.IsDecimalClicked) && (calculatorButton.Text == "."))
             {
                 return;
             }
 
-            ResultTextBox.Text += calculatorButton.Text;
+            if (calculatorButton.Text == ".")
+            {
+                this.IsDecimalClicked = true;
+            }
+
+            if (ResultTextBox.Text == "0")
+            {
+              
+                if (calculatorButton.Text == ".")
+                {
+                    ResultTextBox.Text += calculatorButton.Text;
+                }
+                else
+                {
+                    ResultTextBox.Text = calculatorButton.Text;
+                }
+            }
+            else
+            {
+                ResultTextBox.Text += calculatorButton.Text;
+            }
+            
 
             //Debug.WriteLine("A Calculator Button was clicked");
         }
@@ -85,7 +134,64 @@ namespace CalculatorDemo
         {
             Button operatorButton = sender as Button; // downcasting 
 
+            switch (operatorButton.Text)
+            {
+                case "C":
+                    this._clear();
+                    break;
+                case "=":
+                    break;
+                case "⌫":
+                    break;
+                case "±":
+                    break;
+                default:
+                    this._calculate(ResultTextBox.Text, operatorButton.Text);
+                    break;
+            }
         }
+
+        /// <summary>
+        /// This method calculates the result of all the operands in the OperandList
+        /// </summary>
+        /// <param name="operand"></param>
+        private void _calculate(string operandString, string operatorString)
+        {
+            double operand = this._convertOperand(operandString);
+        }
+
+        /// <summary>
+        /// This method converts the string from the ResultTextBox to a number
+        /// </summary>
+        /// <param name="operandString"></param>
+        /// <returns></returns>
+        private double _convertOperand(string operandString)
+        {
+            try
+            {
+                return Convert.ToDouble(operandString);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("An Error ocurred");
+                Debug.WriteLine(e.Message);
+            }
+            return 0;
+            
+        }
+
+        /// <summary>
+        /// This is the private _clear method. It resets the calculator 
+        /// </summary>
+        private void _clear()
+        {
+            this.IsDecimalClicked = false;
+            ResultTextBox.Text = "0";
+
+            this.CurrentOperator = "C";
+            this.OperandList = new List<double>();
+        }
+
         /// <summary>
         /// This is the event handler for the "Load" event 
         /// </summary>
@@ -93,7 +199,7 @@ namespace CalculatorDemo
         /// <param name="e"></param>
         private void CalculatorForm_Load(object sender, EventArgs e)
         {
-            this.IsDecimalClicked = false;
+            this._clear();
         }
     }
 }
