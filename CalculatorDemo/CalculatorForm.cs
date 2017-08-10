@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.7 - Refactored CalculatorButton_click event & Added _calculate and _convertOperand methods
+ * Ver: 0.8 - Added the _showResult method 
  */
 
 
@@ -27,6 +27,7 @@ namespace CalculatorDemo
 
         private List<double> _operandList;
 
+        private double _result;
         // PUBLIC PROPERTIES 
         public bool IsDecimalClicked
         {
@@ -61,6 +62,18 @@ namespace CalculatorDemo
             set
             {
                 this._operandList = value;
+            }
+        }
+
+        public double Result
+        {
+            get
+            {
+                return this._result;
+            }
+            set
+            {
+                this._result = value;
             }
         }
 
@@ -134,30 +147,60 @@ namespace CalculatorDemo
         {
             Button operatorButton = sender as Button; // downcasting 
 
+            double operand = this._convertOperand(ResultTextBox.Text); // convert to number
+
             switch (operatorButton.Text)
             {
                 case "C":
                     this._clear();
                     break;
                 case "=":
+                    this._showResult(operand);
                     break;
                 case "⌫":
                     break;
                 case "±":
                     break;
                 default:
-                    this._calculate(ResultTextBox.Text, operatorButton.Text);
+                    this._calculate(operand, operatorButton.Text);
                     break;
             }
+        }
+
+        /// <summary>
+        /// This method shows the Result of the last operation in the ResultTextBox
+        /// </summary>
+        /// <param name="text"></param>
+        private void _showResult(double operand)
+        {
+            this._calculate(operand, this.CurrentOperator);
+            ResultTextBox.Text = this.Result.ToString();
         }
 
         /// <summary>
         /// This method calculates the result of all the operands in the OperandList
         /// </summary>
         /// <param name="operand"></param>
-        private void _calculate(string operandString, string operatorString)
+        private void _calculate(double operand, string operatorString)
         {
-            double operand = this._convertOperand(operandString);
+
+            OperandList.Add(operand);
+
+            if (OperandList.Count > 1)
+            {
+                switch (operatorString)
+                {
+                    case "+":
+                        this.Result = this.OperandList[0] + this.OperandList[1];
+                        break;
+                    case "-":
+                        this.Result = this.OperandList[0] - this.OperandList[1];
+                        break;
+                }
+                    
+            }
+
+            this.CurrentOperator = operatorString;
         }
 
         /// <summary>
