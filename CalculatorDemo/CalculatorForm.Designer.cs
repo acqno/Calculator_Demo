@@ -297,6 +297,7 @@
             this.Name = "CalculatorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CalculatorForm_FormClosing);
             this.buttonTableLayout.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

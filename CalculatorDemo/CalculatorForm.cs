@@ -11,7 +11,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.1 - Created the project
+ * Ver: 0.2 - Added the FormClosing event handler
  */
 
 
@@ -22,6 +22,16 @@ namespace CalculatorDemo
         public CalculatorForm()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// This is an event handler for the "FormClosing" event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculatorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }
