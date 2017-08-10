@@ -7,7 +7,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.1 - Created the project
+ * Ver: 0.2 - Starts the SplashForm first
  */
 
 namespace CalculatorDemo
@@ -22,7 +22,7 @@ namespace CalculatorDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CalculatorForm());
+            Application.Run(new SplashForm());
         }
     }
 }
