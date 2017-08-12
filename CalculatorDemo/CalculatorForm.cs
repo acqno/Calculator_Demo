@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 04, 2017
  * Desc: This is a calculator demo
- * Ver: 0.8 - Added the _showResult method 
+ * Ver: 0.9 - Fixed bug in the CalculatorButton_click
  */
 
 
@@ -28,6 +28,8 @@ namespace CalculatorDemo
         private List<double> _operandList;
 
         private double _result;
+
+        private bool _isOperandTwo; 
         // PUBLIC PROPERTIES 
         public bool IsDecimalClicked
         {
@@ -74,6 +76,18 @@ namespace CalculatorDemo
             set
             {
                 this._result = value;
+            }
+        }
+
+        public bool IsOperandTwo
+        {
+            get
+            {
+                return this._isOperandTwo;
+            }
+            set
+            {
+                this._isOperandTwo = value;
             }
         }
 
@@ -131,7 +145,15 @@ namespace CalculatorDemo
             }
             else
             {
-                ResultTextBox.Text += calculatorButton.Text;
+                if ((OperandList.Count > 0) && (this.IsOperandTwo == false))
+                {
+                    ResultTextBox.Text = calculatorButton.Text;
+                    this.IsOperandTwo = true;
+                }
+                else
+                {
+                    ResultTextBox.Text += calculatorButton.Text;
+                }
             }
             
 
@@ -175,6 +197,7 @@ namespace CalculatorDemo
         {
             this._calculate(operand, this.CurrentOperator);
             ResultTextBox.Text = this.Result.ToString();
+            
         }
 
         /// <summary>
@@ -197,7 +220,10 @@ namespace CalculatorDemo
                         this.Result = this.OperandList[0] - this.OperandList[1];
                         break;
                 }
-                    
+                this.OperandList.Clear();
+                this.OperandList.Add(this.Result);
+                this.IsOperandTwo = false;
+
             }
 
             this.CurrentOperator = operatorString;
@@ -233,6 +259,8 @@ namespace CalculatorDemo
 
             this.CurrentOperator = "C";
             this.OperandList = new List<double>();
+            this.IsOperandTwo = false;
+            this._result = 0;
         }
 
         /// <summary>
