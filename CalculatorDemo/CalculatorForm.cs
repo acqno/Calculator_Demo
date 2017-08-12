@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /* Name: Alvun Quijano
  * Date: Aug 11, 2017
  * Desc: This is a calculator demo
- * Ver: 1.0 - Added multiply function to the OperatorButton_click
+ * Ver: 1.1 - Added divide function to the OperatorButton_click event 
  */
 
 
@@ -29,7 +29,8 @@ namespace CalculatorDemo
 
         private double _result;
 
-        private bool _isOperandTwo; 
+        private bool _isOperandTwo;
+
         // PUBLIC PROPERTIES 
         public bool IsDecimalClicked
         {
@@ -180,6 +181,7 @@ namespace CalculatorDemo
                     this._showResult(operand);
                     break;
                 case "⌫":
+                    this._backspace(ResultTextBox.Text);
                     break;
                 case "±":
                     break;
@@ -187,6 +189,12 @@ namespace CalculatorDemo
                     this._calculate(operand, operatorButton.Text);
                     break;
             }
+        }
+
+        private string _backspace(string resultText)
+        {
+            ResultingText = resultText.Substring(0, (resultText.Length - 1));
+            return ResultingText.ToString();
         }
 
         /// <summary>
@@ -222,8 +230,11 @@ namespace CalculatorDemo
                     case "x":
                         this.Result = this.OperandList[0] * this.OperandList[1];
                         break;
-                    
-                   
+                    case "÷":
+                        this.Result = this.OperandList[0] / this.OperandList[1];
+                        break;
+
+
                 }
                 this.OperandList.Clear();
                 this.OperandList.Add(this.Result);
