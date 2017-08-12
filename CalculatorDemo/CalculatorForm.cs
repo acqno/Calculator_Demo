@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /* Name: Alvun Quijano
- * Date: Aug 04, 2017
+ * Date: Aug 11, 2017
  * Desc: This is a calculator demo
- * Ver: 0.9 - Fixed bug in the CalculatorButton_click
+ * Ver: 1.0 - Added multiply function to the OperatorButton_click
  */
 
 
@@ -219,6 +219,11 @@ namespace CalculatorDemo
                     case "-":
                         this.Result = this.OperandList[0] - this.OperandList[1];
                         break;
+                    case "x":
+                        this.Result = this.OperandList[0] * this.OperandList[1];
+                        break;
+                    
+                   
                 }
                 this.OperandList.Clear();
                 this.OperandList.Add(this.Result);
